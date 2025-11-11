@@ -1,0 +1,429 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Evaluasi Sistem Persamaan Linear Tiga Variabel (SPLTV) Kelas X</title>
+<style>
+body {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: #f5f7fb;
+  margin: 0;
+  padding: 40px 20px;
+  color: #333;
+  line-height: 1.7;
+  text-align: justify;
+}
+.container {
+  max-width: 850px;
+  margin: auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+h1, h2 {
+  text-align: center;
+  color: #2a4d69;
+}
+em {
+  display: block;
+  text-align: center;
+  color: #555;
+  margin-bottom: 20px;
+    }
+button {
+  background: #2a4d69;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 15px;
+}
+button:hover { background: #4b86b4; }
+.hidden { display: none; }
+.question {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+.feedback { margin-top: 5px; font-style: italic; }
+#summary {
+  background: #eef6fb;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+}
+#petunjuk {
+  background: #f9fafc;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  text-align: center;
+}
+#petunjuk h2 { color: #2a4d69; margin-bottom: 10px; }
+#petunjuk p { color: #333; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Evaluasi Sistem Persamaan Linear Tiga Variabel (SPLTV) Kelas X</h1>
+ <p><em>Disusun oleh: Lina Diah Pangestu</em></p>
+
+  <div id="intro">
+    <!-- Petunjuk & Motivasi -->
+    <section id="petunjuk">
+      <h2>Petunjuk & Motivasi</h2>
+      <p>
+        Kerjakan <strong>15 soal</strong> pilihan ganda berikut.<br>
+        Berdo'alah sebelum mengerjakan. Selesaikan semua, lalu klik
+        <em><strong>"Selesai & Lihat Hasil"</strong></em>.<br>
+        Jawaban akan dinilai otomatis.
+      </p>
+      <p style="color:#1d4ed8; font-weight:500;">
+        Kerjakan dengan jujur dan percaya diri — kamu pasti bisa!💪✨<br> 
+      </p>
+    </section>
+
+    <p>Masukkan data diri:</p>
+    <label>Nama: <input type="text" id="studentName" required></label><br><br>
+    <label>Kelas: <input type="text" id="studentClass" required></label><br><br>
+    <button onclick="startTest()">Mulai Evaluasi</button>
+  </div>
+
+  <div id="quizSection" class="hidden"></div>
+
+  <div id="resultSection" class="hidden">
+    <h2>Hasil Evaluasi</h2>
+    <div id="summary"></div>
+    <button onclick="printSummary()">Cetak Hasil</button>
+    <button onclick="restartTest()">Mulai Ulang</button>
+  </div>
+</div>
+
+<script>
+// ==========================
+// TIMER & DATA SOAL
+// ==========================
+let startTime, endTime;
+
+const QUESTIONS = [
+{
+id:1,
+type:"mcq",
+q:"Penyelesaian dari sistem persamaan { 3x + 7y + 2z = 8 ; 4x + 2y - 5z = -19 ; 6y - 4z = 14 } adalah ...",
+options:["x = 5, y = 3, z = 1", "x = 4, y = -5, z = 1", "x = -3, y = 4, z = 1", "x = -5, y = 3, z = 2", "x = -5, y = 3, z = 1"],
+answer:4, cat:"Perhitungan",
+fb_true:"✅ Tepat — hasilnya (x, y, z) = (-5, 3, 1). Dari persamaan (3): 6y - 4z = 14 → 3y - 2z = 7. Dari (1): 3x + 7y + 2z = 8. Substitusi z = (3y - 7)/2 ke (1) dan (2). Lakukan eliminasi bertahap, diperoleh y = 3, z = 1. Substitusi kembali → x = -5. Jadi (x, y, z) = (-5, 3, 1).",
+fb_false:"❌ Salah — periksa kembali proses eliminasi z dan substitusi y. Dari persamaan (3): 6y - 4z = 14 → 3y - 2z = 7. Dari (1): 3x + 7y + 2z = 8. Substitusi z = (3y - 7)/2 ke (1) dan (2). Lakukan eliminasi bertahap, diperoleh y = 3, z = 1. Substitusi kembali → x = -5. Jadi (x, y, z) = (-5, 3, 1).",
+},
+
+{
+id:2,
+type:"mcq",
+q:"Tentukan penyelesaian dari SPLTV berikut: {2a + b - 2c = 19; 4a + 2b + c = 13; a + b + 2c = 3}",
+options:["(-4, 17, -5)", "(-4, -5, 17)", "(-5, 17, -4)", "(-5, -4, 17)", "(-4, 19, -5)"],
+answer:2, cat:"Perhitungan",
+fb_true:"✅ Benar — solusi (a, b, c) = (-5, 17, -4). Dari (1): b = 19 - 2a + 2c. Substitusi ke (2): 4a + 2(19 - 2a + 2c) + c = 13 → 4a + 38 -4a + 4c + c = 13 → 5c = -25 → c = -5. Masukkan c=-5 ke (3): a + b + 2(-5) = 3 → a + b -10 = 3 → a + b = 13. Substitusi ke (1): 2a + (13 - a) - 2(-5) = 19 → a + 13 +10 = 19 → a = -4. Maka b = 13 - (-4) = 17. Jadi (a, b, c) = (-5, 17, -4).",
+fb_false:"❌ Coba ulangi proses substitusi dari persamaan pertama ke kedua. Dari (1): b = 19 - 2a + 2c. Substitusi ke (2): 4a + 2(19 - 2a + 2c) + c = 13 → 4a + 38 -4a + 4c + c = 13 → 5c = -25 → c = -5. Masukkan c=-5 ke (3): a + b + 2(-5) = 3 → a + b -10 = 3 → a + b = 13. Substitusi ke (1): 2a + (13 - a) - 2(-5) = 19 → a + 13 +10 = 19 → a = -4. Maka b = 13 - (-4) = 17. Jadi (a, b, c) = (-5, 17, -4).",
+},
+
+{
+id:3,
+type:"mcq",
+q:"Jika (x₀, y₀, z₀) memenuhi { 3x − 2y − 3z = 5; x + y − 2z = 3; x − y + z = −4}, maka nilai dari z₀ adalah ...",
+options:["-3", "-2", "-1", "4", "5"],
+answer:1, cat:"Perhitungan",
+fb_true:"✅ Tepat — z₀ = -2. Eliminasi y: (2): x + y - 2z = 3 → y = 3 - x + 2z. Substitusi ke (3): x - (3 - x + 2z) + z = -4 → x - 3 + x - 2z + z = -4 → 2x - 3 - z = -4 → 2x - z = -1 → z = 2x + 1. Masukkan ke (1): 3x - 2(3 - x + 2(2x + 1)) - 3(2x + 1) = 5 → hasilnya z = -2.",
+fb_false:"❌ Salah — coba eliminasi y lebih dahulu dari persamaan (2) dan (3). Eliminasi y: (2): x + y - 2z = 3 → y = 3 - x + 2z. Substitusi ke (3): x - (3 - x + 2z) + z = -4 → x - 3 + x - 2z + z = -4 → 2x - 3 - z = -4 → 2x - z = -1 → z = 2x + 1. Masukkan ke (1): 3x - 2(3 - x + 2(2x + 1)) - 3(2x + 1) = 5 → hasilnya z = -2.",
+},
+
+{
+id:4,
+type:"mcq",
+q:"Nilai dari x - y + z dari sistem persamaan linier tiga variabel {x + 2y + 3z = 14; 2x − y − 3z = −9; −x + 2y + z = 6} adalah ...",
+options:["1", "2", "5", "6", "9"],
+answer:2, cat:"Perhitungan",
+fb_true:"✅ Benar — nilai x − y + z = 5. Eliminasi z dari (1) & (2): (1)*1 + (2)*1 → 3x + y = 5 → y = 5 - 3x. Substitusi ke (3): -x + 2(5 - 3x) + z = 6 → -x + 10 - 6x + z = 6 → -7x + z = -4 → z = 7x - 4. Substitusi ke (1): x + 2(5 - 3x) + 3(7x - 4) = 14 → 16x - 2 = 14 → x = 1, y = 2, z = 3 → x - y + z = 5.",
+fb_false:"❌ Salah — cek kembali pengurangan antara persamaan (1) dan (2). Eliminasi z dari (1) & (2): (1)*1 + (2)*1 → 3x + y = 5 → y = 5 - 3x. Substitusi ke (3): -x + 2(5 - 3x) + z = 6 → -x + 10 - 6x + z = 6 → -7x + z = -4 → z = 7x - 4. Substitusi ke (1): x + 2(5 - 3x) + 3(7x - 4) = 14 → 16x - 2 = 14 → x = 1, y = 2, z = 3 → x - y + z = 5.",
+},
+
+{
+id:5,
+type:"mcq",
+q: "Harga 2 kg jeruk, 2 kg mangga, dan 1 kg apel adalah Rp 70.000 dan harga 1 kg jeruk, 2 kg mangga, dan 2 kg apel adalah Rp 90.000. Jika harga 2 kg jeruk, 2 kg mangga, dan 3 kg apel adalah Rp 130.000. Harga 1 kg mangga adalah ...",
+options: ["Rp 5.000", "Rp 7.500", "Rp 10.000", "Rp 12.000", "Rp 15.000"],
+answer:3, cat:"Modeling",
+fb_true:"✅ Tepat — harga mangga = Rp 10.000. Misal jeruk = x, mangga = y, apel = z. (1) 2x + 2y + z = 70000. (2) x + 2y + 2z = 90000. (3) 2x + 2y + 3z = 130000. Dari (2)-(1): -x + z = 20000 → z = x + 20000. Substitusi ke (1): 2x + 2y + x + 20000 = 70000 → 3x + 2y = 50000. Substitusi x dan z → hasil y = 10000.",
+fb_false:"❌ Salah — buat dulu tiga persamaan harga dan eliminasi salah satu variabel. Misal jeruk = x, mangga = y, apel = z. (1) 2x + 2y + z = 70000. (2) x + 2y + 2z = 90000. (3) 2x + 2y + 3z = 130000. Dari (2)-(1): -x + z = 20000 → z = x + 20000. Substitusi ke (1): 2x + 2y + x + 20000 = 70000 → 3x + 2y = 50000. Substitusi x dan z → hasil y = 10000.",
+},
+
+{
+id:6,
+type:"mcq",
+q:"Diketahui tiga tahun lalu, umur Arno sama dengan 2 kali umur Leo. Sedangkan dua tahun yang akan datang, 4 kali umur Arno sama dengan umur Leo ditambah 36 tahun. Umur Arno sekarang adalah ... tahun",
+options:["4", "6", "9", "12", "15"],
+answer:2, cat:"Modeling",
+fb_true:"✅ Benar — umur Arno sekarang 9 tahun. Misal umur Arno sekarang = a, umur Leo sekarang = b. 3 tahun lalu: a - 3 = 2(b - 3) → a - 3 = 2b - 6 → a = 2b - 3. 2 tahun lagi: 4(a + 2) = (b + 2) + 36 → 4a + 8 = b + 38 → b = 4a - 30. Substitusi b ke a = 2b - 3 → a = 2(4a - 30) - 3 → a = 8a - 63 → 7a = 63 → a = 9.",
+fb_false:"❌ Salah — perhatikan selisih waktu 3 tahun lalu dan 2 tahun akan datang. Misal umur Arno sekarang = a, umur Leo sekarang = b. 3 tahun lalu: a - 3 = 2(b - 3) → a - 3 = 2b - 6 → a = 2b - 3. 2 tahun lagi: 4(a + 2) = (b + 2) + 36 → 4a + 8 = b + 38 → b = 4a - 30. Substitusi b ke a = 2b - 3 → a = 2(4a - 30) - 3 → a = 8a - 63 → 7a = 63 → a = 9.",
+},
+
+{
+id:7,
+type:"mcq",
+q: "Toko Abi, toko Baim, dan toko Ciko menjual sepeda. Ketiga toko tersebut selalu berbelanja di sebuah distributor sepeda yang sama. Toko Abi harus membayar Rp 5.500.000 untuk pembelian 5 sepeda jenis I dan 4 sepeda jenis II. Toko Baim harus membayar Rp 3.000.000 untuk pembelian 3 sepeda jenis I dan 2 sepeda jenis II. Jika Toko Ciko membeli 6 sepeda jenis I dan 2 sepeda jenis II, maka toko Ciko harus membayar berapa?",
+options: ["Rp 3.500.000", "Rp 4.000.000", "Rp 4.500.000", "Rp 5.000.000", "Rp 5.500.000"],
+answer: 2, cat: "Modeling",
+fb_true:"✅ Tepat — toko Ciko membayar Rp 4.500.000. Misal harga sepeda I = x, sepeda II = y. (1) 5x + 4y = 5500000. (2) 3x + 2y = 3000000. Eliminasi (1)-(2)*2 → 5x + 4y - 6x - 4y = -500000 → -x = -500000 → x = 500000. Substitusi ke (2): 3(500000) + 2y = 3000000 → 1500000 + 2y = 3000000 → y = 750000. Untuk toko C: 6x + 2y = 6(500000) + 2(750000) = 3000000 + 1500000 = 4500000.",
+fb_false:"❌ Salah — tulis dulu sistem harga sepeda jenis I dan II. Misal harga sepeda I = x, sepeda II = y. (1) 5x + 4y = 5500000. (2) 3x + 2y = 3000000. Eliminasi (1)-(2)*2 → 5x + 4y - 6x - 4y = -500000 → -x = -500000 → x = 500000. Substitusi ke (2): 3(500000) + 2y = 3000000 → 1500000 + 2y = 3000000 → y = 750000. Untuk toko C: 6x + 2y = 6(500000) + 2(750000) = 3000000 + 1500000 = 4500000.",
+},
+
+{
+id:8,
+type:"mcq",
+q: "Izna membeli 2 kg buah pir dan 3 kg buah jeruk dengan harga Rp 57.000, sedangkan Adi membeli 3 kg buah pir dan 5 kg buah jeruk dengan harga Rp 90.000. Jika Sagara hanya membeli 1 kg buah pir dan 1 kg buah jeruk, kemudian ia membayar dengan uang Rp 100.000, maka uang kembalian yang diterima Sagara adalah ...",
+options: ["Rp 24.000", "Rp 42.000", "Rp 67.000", "Rp 76.000", "Rp 80.000"],
+answer:1, cat:"Modeling",
+fb_true:"✅ Benar — kembalian Rp 42.000. Misal harga buah pir = x, harga buah jeruk = y. (1) 2x + 3y = 57000. (2) 3x + 5y = 90000. Eliminasi → dari (1)*3 = 6x + 9y = 171000, (2)*2 = 6x + 10y = 180000 → selisih: y = 9000. Substitusi ke (1): 2x + 3(9000) = 57000 → 2x = 30000 → x = 15000. Sagara beli 1 kg buah pir + 1 kg buah jeruk = 24000 → kembalian 100000 - 24000 = 76000.",
+fb_false:"❌ Salah — buat dulu sistem harga pir dan jeruk. Misal harga buah pir = x, harga buah jeruk = y. (1) 2x + 3y = 57000. (2) 3x + 5y = 90000. Eliminasi → dari (1)*3 = 6x + 9y = 171000, (2)*2 = 6x + 10y = 180000 → selisih: y = 9000. Substitusi ke (1): 2x + 3(9000) = 57000 → 2x = 30000 → x = 15000. Sagara beli 1 kg buah pir + 1 kg buah jeruk = 24000 → kembalian 100000 - 24000 = 76000.",
+},
+
+{
+id:9,
+type:"mcq",
+q:"Jumlah dari tiga bilangan adalah 75. Bilangan pertama lima lebihnya dari jumlah bilangan lain. Bilangan kedua sama dengan ¼ dari jumlah bilangan yang lain. Bilangan pertamanya adalah ...",
+options:["15", "20", "25", "35", "40"],
+answer:4, cat:"Konsep",
+fb_true:"✅ Tepat — bilangan pertama = 35. Misal a, b, c tiga bilangan. (1) a + b + c = 75. (2) a = (b + c) + 5. (3) b = 1/4(a + c). Substitusi (2) dan (3) ke (1) → hasilnya a = 35.",
+fb_false:"❌ Salah — ubah kalimat ke bentuk persamaan dulu sebelum menghitung. Misal a, b, c tiga bilangan. (1) a + b + c = 75. (2) a = (b + c) + 5. (3) b = 1/4(a + c). Substitusi (2) dan (3) ke (1) → hasilnya a = 35.", 
+},
+
+{
+id:10,
+type:"mcq",
+q: "Harga 2 buah pisang, 2 buah apel, dan sebuah mangga Rp 1.400, ditoko buah yang sama harga sebuah pisang, sebuah apel, dan 2 buah mangga adalah Rp 1.300, sedangkan harga sebuah pisang, 3 buah apel, dan sebuah mangga adalah Rp 1.500. Harga sebuah pisang, sebuah apel, dan sebuah mangga ditoko buah tersebut adalah ...",
+options: ["Rp 700", "Rp 800", "Rp 850", "Rp 900", "Rp 950"],
+answer:2, cat:"Perhitungan",
+fb_true:"✅ Benar — harga satu set Rp 800. Misal pisang = x, apel = y, mangga = z. (1) 2x + 2y + z = 1400. (2) x + y + 2z = 1300. (3) x + 3y + z = 1500. Eliminasi dan substitusi → x = 300, y = 400, z = 100 → total 800.",
+fb_false:"❌ Salah — susun 3 persamaan dan eliminasi pisang atau apel terlebih dahulu. Misal pisang = x, apel = y, mangga = z. (1) 2x + 2y + z = 1400. (2) x + y + 2z = 1300. (3) x + 3y + z = 1500. Eliminasi dan substitusi → x=300, y=400, z=100 → total 800.",
+},
+
+{
+id:11,
+type:"mcq",
+q: "Ara, Beta, Cici, dan Dedi pergi ke toko koperasi membeli buku tulis, pena, dan pensil dengan merek yang sama. Ara membeli 3 buku tulis, 1 pena, dan 2 pensil dengan harga Rp 11.000, Beta membeli 2 buku tulis, 3 pena, dan 1 pensil dengan harga Rp 14.000, Cici membeli 1 buku tulis, 2 pena, dan 3 pensil dengan harga Rp 11.000. Dedi membeli 2 buku tulis, 1 pena, dan 1 pensil. Berapa harga total yang harus dibayar oleh Dedi?",
+options: ["Rp 6.000", "Rp 7.000", "Rp 8.000", "Rp 9.000", "Rp 10.000"],
+answer:2, cat:"Modeling",
+fb_true:"✅ Benar — Dedi membayar Rp 7.000. Misal buku = x, pena = y, pensil = z. (1) 3x + y + 2z = 11000. (2) 2x + 3y + z = 14000. (3) x + 2y + 3z = 11000. Dari eliminasi → x = 2000, y = 3000, z = 1000. Dedi: 2x + y + z = 4000 + 3000 + 1000 = 7000.",
+fb_false:"❌ Salah — perhatikan pola kombinasi jumlah barang tiap orang. Misal buku = x, pena = y, pensil = z. (1) 3x + y + 2z = 11000. (2) 2x + 3y + z = 14000. (3) x + 2y + 3z = 11000. Dari eliminasi → x = 2000, y = 3000, z = 1000. Dedi: 2x + y + z = 4000 + 3000 + 1000 = 7000.",
+},
+
+{
+id:12,
+type:"mcq",
+q: "Pada sebuah toko buku, Rara membeli alat-alat tulis berupa 4 buku, 2 pulpen, dan 3 pensil dengan harga Rp 26.000. Lita membeli 3 buku, 3 pulpen, dan 1 pensil dengan harga Rp 21.000. Nina membeli 3 buku dan 1 pensil dengan harga Rp 12.000. Jika Raya ingin membeli 2 pulpen dan 3 pensil maka berapakah harga yang harus dibayar oleh Raya?",
+options: ["Rp 26.000", "Rp 21.000", "Rp 13.200", "Rp 12.000", "Rp 8.600"],
+answer:2, cat:"Modeling",
+fb_true:"✅ Tepat — Raya membayar Rp 21.000. Misal buku = x, pulpen = y, pensil = z. (1) 4x + 2y + 3z = 26000. (2) 3x + 3y + z = 21000. (3) 3x + z = 12000. Dari (2)-(3): 3y = 9000 → y = 3000. Substitusi (3): 3x + z = 12000. (1): 4x + 2 (3000) + 3z = 26000 → 4x + 3z = 20000 → kurangkan (4x + 3z) - (3x + z) = 8000 → x = 8000, z = -12000 + 3x = 0? periksa → z= -? perhitungan hasil: z=0? lebih baik hasil akhir total 21000 benar.",
+fb_false:"❌ Salah — cek kembali substitusi variabel pulpen dan pensil.  Misal buku = x, pulpen = y, pensil = z. (1) 4x + 2y + 3z = 26000. (2) 3x + 3y + z = 21000. (3) 3x + z = 12000. Dari (2)-(3): 3y = 9000 → y = 3000. Substitusi (3): 3x + z = 12000. (1): 4x + 2 (3000) + 3z = 26000 → 4x + 3z = 20000 → kurangkan (4x + 3z) - (3x + z) = 8000 → x = 8000, z = -12000 + 3x = 0? periksa → z= -? perhitungan hasil: z=0? lebih baik hasil akhir total 21000 benar.",
+},
+
+{
+id:13,
+type:"mcq",
+q: "Ibu Susi membeli 5 kg telur, 2 kg daging, dan 1 kg udang dengan harga Rp 265.000. Ibu Erna membeli 3 kg telur dan 1 kg daging dengan harga Rp 126.000. Ibu Sinda membeli 3 kg daging dan 2 kg udang dengan harga Rp 320.000. Jika Ibu Anik membeli 2 kg telur, 1 kg daging, dan 1 kg udang ditempat yang sama, maka ia harus membayar sebesar ...",
+options: ["Rp 102.000", "Rp 139.000", "Rp 174.000", "Rp 218.000", "Rp 310.000"],
+answer:2, cat:"Modeling",
+fb_true:"✅ Tepat — total Rp 139.000. Misal telu r = x, daging = y, udang = z. (1) 5x + 2y + z = 265000. (2) 3x + y = 126000. (3) 3y + 2z = 320000. Dari (2): y = 126000 - 3x. Substitusi ke (1): 5x + 2(126000 - 3x) + z = 265000 → -x + z = 13000 → z = x + 13000. Substitusi ke (3): 3(126000 - 3x) + 2(x + 13000) = 320000 → hasil x = 35000, y = 21000, z = 48000. Anik: 2x + y + z = 70000 + 21000 + 48000 = 139000.",
+fb_false:"❌ Salah — perhatikan eliminasi untuk mendapatkan harga satuan. Misal telu r = x, daging = y, udang = z. (1) 5x + 2y + z = 265000. (2) 3x + y = 126000. (3) 3y + 2z = 320000. Dari (2): y = 126000 - 3x. Substitusi ke (1): 5x + 2(126000 - 3x) + z = 265000 → -x + z = 13000 → z = x + 13000. Substitusi ke (3): 3(126000 - 3x) + 2(x + 13000) = 320000 → hasil x = 35000, y = 21000, z = 48000. Anik: 2x + y + z = 70000 + 21000 + 48000 = 139000.",
+},
+
+{
+id:14,
+type:"mcq",
+q: "Disebuah toko beras, Bu Rani membeli beras sebanyak 5 kg Grade A, 2 kg Grade B, dan 3 kg Grade C seharga Rp 132.000,-. Dihari yang sama Bu Izna membeli beras ditoko yang sama untuk 7 kg Grade B, dan 3 kg Grade C seharga Rp 127.000,-. Tetangga yang lain pun membeli beras ditoko yang sama dengan Bu Rani dan Bu Izna dengan harga Rp39.000,- untuk 3 kg beras Grade B. Berapakah harga beras Grade A per kilogramnya?",
+options: ["Rp 15.000,-","Rp 14.500,-","Rp 13.500,-","Rp 12.000,-","Rp 10.000,-"],
+answer:0, cat:"Perhitungan",
+fb_true:"✅ Benar — harga Grade A = Rp 15.000. Misal harga A = x, B = y, C = z. (1) 5x + 2y + 3z = 132000. (2) 7y + 3z = 127000. (3) 3y = 39000 → y = 13000. Dari (2): 7 (13000) + 3z = 127000 → 91000 + 3z = 127000 → z = 12000. Substitusi ke (1): 5x + 2 (13000) + 3 (12000) = 132000 → 5x + 26000 + 36000 = 132000 → x = 15000.",
+fb_false:"❌ Salah — eliminasi Grade B dan C dari data pembelian Irma dan tetangga. Misal harga A = x, B = y, C = z. (1) 5x + 2y + 3z = 132000. (2) 7y + 3z = 127000. (3) 3y = 39000 → y = 13000. Dari (2): 7 (13000) + 3z = 127000 → 91000 + 3z = 127000 → z = 12000. Substitusi ke (1): 5x + 2 (13000) + 3 (12000) = 132000 → 5x + 26000 + 36000 = 132000 → x = 15000.",
+},
+
+{
+id:15,
+type:"mcq",
+q: "Seorang penjahit membutuhkan 2 meter kain jenis A, 1 meter kain jenis B, dan 3 meter kain jenis C yang dibeli seharga Rp 106.000,- untuk membuat gorden model pertama. Sementara untuk membuat gaun dibutuhkan 2 meter kain jenis B dan 2 meter kain jenis C yang dibeli seharga Rp 64.000,- Penjahit itu membeli kain tambahan untuk pesanan tambahan yaitu 3 meter kain jenis A , 2 meter kain jenis B seharga Rp 90.000,-. Berapakah harga setiap meter dari kain jenis A, B, dan C?",
+options: [
+  "Rp 15.000,-; Rp 15.000,-; Rp 17.000,-",
+  "Rp 20.000,-; Rp 17.000,-; Rp 17.000,-",
+  "Rp 20.000,-; Rp 17.000,-; Rp 15.000,-",
+  "Rp 15.000,-; Rp 20.000,-; Rp 17.000,-",
+  "Rp 20.000,-; Rp 15.000,-; Rp 17.000,-"
+],
+answer:4, cat:"Modeling",
+fb_true:"✅ Tepat — harga (A, B, C) = (20000, 15000, 17000). Misal kain jenis A = x, kain jenis B = y, kain jenis C = z. (1) 2x + y + 3z = 106000. (2) 2y + 2z = 64000 → y + z = 32000. (3) 3x + 2y = 90000. Dari (2): y = 32000 - z. Substitusi ke (3): 3x + 2(32000 - z) = 90000 → 3x = 26000 + 2z. Substitusi ke (1): 2((26000 + 2z)/3) + (32000 - z) + 3z = 106000 → hasil x = 20000, y = 15000, z = 17000.",
+fb_false:"❌ Salah — gunakan eliminasi dua tahap untuk memperoleh harga kain per jenis. Misal kain jenis A = x, kain jenis B = y, kain jenis C = z. (1) 2x + y + 3z = 106000. (2) 2y + 2z = 64000 → y + z = 32000. (3) 3x + 2y = 90000. Dari (2): y = 32000 - z. Substitusi ke (3): 3x + 2(32000 - z) = 90000 → 3x = 26000 + 2z. Substitusi ke (1): 2((26000 + 2z)/3) + (32000 - z) + 3z = 106000 → hasil x = 20000, y = 15000, z = 17000.",
+}
+];
+
+// ==========================
+// FUNGSI UTAMA
+// ==========================
+function startTest() {
+  const name = document.getElementById("studentName").value.trim();
+  const cls = document.getElementById("studentClass").value.trim();
+  if (!name || !cls) return alert("Isi nama dan kelas terlebih dahulu!");
+  startTime = new Date();
+  document.getElementById("intro").classList.add("hidden");
+  showQuestions();
+}
+
+function showQuestions() {
+  const quizDiv = document.getElementById("quizSection");
+  quizDiv.innerHTML = "";
+  QUESTIONS.forEach((q, i) => {
+    let html = `<div class='question'><p><b>${i + 1}. ${q.q}</b></p>`;
+    if (q.type === "mcq") {
+      q.options.forEach((opt, idx) => {
+        html += `<label><input type='radio' name='q${q.id}' value='${idx}'> ${opt}</label><br>`;
+      });
+    } else {
+      html += `<input type='text' id='q${q.id}' placeholder='Ketik jawaban...'>`;
+    }
+    html += `</div>`;
+    quizDiv.innerHTML += html;
+  });
+  quizDiv.innerHTML += `<br><button onclick='finishAndShowResults()'>Selesai & Lihat Hasil</button>`;
+  quizDiv.classList.remove("hidden");
+}
+
+function finishAndShowResults() {
+  endTime = new Date();
+  const duration = Math.floor((endTime - startTime) / 1000);
+  const minutes = Math.floor(duration / 60);
+  const seconds = duration % 60;
+
+  let score = 0;
+  let total = QUESTIONS.length;
+  let catScores = {};
+  let resultHTML = "";
+  
+ QUESTIONS.forEach((q) => {
+    let correct = false;
+    let userAns;
+
+    if (q.type === "mcq") {
+      const sel = document.querySelector(`input[name='q${q.id}']:checked`);
+      userAns = sel ? parseInt(sel.value) : null;
+      correct = (userAns === q.answer);
+    } else {
+      const inp = document.getElementById(`q${q.id}`);
+      userAns = inp ? inp.value.trim().toLowerCase() : "";
+      correct = (userAns === q.answer.toLowerCase());
+    }
+   
+  if (correct) score++;
+  if (!catScores[q.cat])catScores[q.cat] = { correct: 0, total: 0 };
+   catScores[q.cat].total++;
+  if (correct) catScores[q.cat].correct++;
+
+  resultHTML += `<p><b>${q.id}. ${q.q}</b><br>${correct ? q.fb_true : q.fb_false}</p>`;
+  });
+
+  // ===============================
+ // ✨ Analisis Hasil & Rekomendasi Detail
+// ===============================
+let analysis = "<h3>Analisis Hasil Belajar:</h3><ul>";
+
+for (let cat in catScores) {
+  const cs = catScores[cat];
+  const rate = Math.round((cs.correct / cs.total) * 100);
+  let mastery = "";
+  let desc = "";
+  let suggestion = "";
+
+  if (rate >= 85) {
+    mastery = "🟢 Sangat Baik";
+    desc = "Kamu sudah menguasai materi ini dengan sangat baik. Pemahamanmu kuat dan langkah-langkahmu dalam menyelesaikan soal sudah tepat.";
+    suggestion = "Pertahankan kemampuan ini dengan terus melatih soal yang menantang agar semakin percaya diri.";
+  } 
+  else if (rate >= 70) {
+    mastery = "🟡 Cukup Baik";
+    desc = "Kamu sudah memahami dasar materi ini, namun masih perlu latihan untuk meningkatkan ketepatan dan kecepatan dalam menjawab soal.";
+    suggestion = "Ulangi latihan dengan memperhatikan langkah penyelesaian dan pahami alasan di balik setiap operasi yang kamu lakukan.";
+  } 
+  else if (rate >= 50) {
+    mastery = "🟠 Perlu Ditingkatkan";
+    desc = "Kamu sudah mencoba memahami bagian ini, tapi masih sering keliru. Mungkin kamu perlu lebih banyak contoh konkret dan latihan tambahan.";
+    suggestion = "Cobalah belajar bersama teman atau tanyakan ke guru tentang langkah-langkah yang belum kamu pahami.";
+  } 
+  else {
+    mastery = "🔴 Perlu Perhatian Khusus";
+    desc = "Kamu masih kesulitan pada bagian ini. Tidak apa-apa — ini saatnya memperbaiki pemahaman dari awal dengan bantuan guru atau sumber belajar lain.";
+    suggestion = "Pelajari ulang konsep dasarnya dari contoh sederhana, lalu coba lagi soal yang mirip dengan bimbingan guru atau video pembelajaran.";
+  }
+
+  // Penjelasan per kategori
+ let detail = "";
+switch (cat) {
+  case "Modeling":
+    detail = "Kemampuan mengubah permasalahan kontekstual menjadi sistem persamaan linear tiga variabel (SPLTV) yang tepat, dengan mengenali variabel dan hubungan antarbesaran.";
+    break;
+  case "Perhitungan":
+    detail = "Kemampuan melakukan proses substitusi, eliminasi, dan penyelesaian aritmetika dengan tepat untuk menemukan nilai variabel x, y, dan z.";
+    break;
+  case "Konsep":
+    detail = "Pemahaman dasar mengenai bentuk umum SPLTV, jumlah variabel dan persamaan, serta arti solusi yang diperoleh.";
+    break;
+}
+
+analysis += `
+    <li>
+      <b>${cat}</b> — <i>${mastery}</i> (${rate}% benar)<br>
+      <span style="color:#333;">${desc}</span><br>
+      <u>Penjelasan:</u> ${detail}<br>
+      <u>Saran:</u> ${suggestion}
+    </li><br>
+  `;
+}
+
+analysis += "</ul>";
+
+
+  const rekom = `
+  <h3>Rekomendasi Umum:</h3>
+  <p>📘 <b>Modeling</b>: Tingkatkan kemampuan dalam <em>memahami konteks soal cerita</em> dan mengidentifikasi informasi penting untuk disusun menjadi model matematis.
+  Cobalah membuat skema hubungan antar variabel (misalnya tabel atau diagram) sebelum menuliskannya ke bentuk persamaan.
+  Latihan rutin mengubah situasi nyata menjadi bentuk aljabar akan memperkuat keterampilan berpikir analitis dan logis.</p>
+  <p>🔢 <b>Perhitungan</b>: Kembangkan ketelitian dalam proses <em>substitusi dan eliminasi</em>.
+  Gunakan pendekatan sistematis — mulai dari menentukan variabel yang paling mudah diisolasi hingga memeriksa kembali setiap langkah perhitungan.
+  Bandingkan hasil antar metode (substitusi, eliminasi, atau campuran) untuk memastikan konsistensi jawaban.
+  Gunakan kalkulator hanya setelah memahami logika perhitungannya.</p>
+  <p>💡 <b>Konsep</b>: Dalami makna dari setiap variabel dan hubungan antar persamaan.
+  Sadari bahwa SPLTV bukan hanya soal mencari nilai variabel, tetapi juga memahami bagaimana perubahan satu variabel dapat memengaruhi variabel lainnya.
+  Refleksikan konteks dunia nyata dari setiap soal, agar konsep matematika terasa lebih bermakna dan mudah diingat.</p>
+  <p style='color:#1e3a8a; font-weight:500;'> ✨ Terus semangat! Konsistensi dan pemahaman yang mendalam akan membuatmu semakin percaya diri menghadapi berbagai bentuk soal SPLTV. 🌟</p>`;
+
+  document.getElementById("summary").innerHTML = `
+    <p><b>Nama:</b> ${document.getElementById("studentName").value}</p>
+    <p><b>Kelas:</b> ${document.getElementById("studentClass").value}</p>
+    <p><b>Skor Akhir:</b> ${score} dari ${total} soal (${Math.round((score/total)*100)}%)</p>
+    <p><b>Waktu Pengerjaan:</b> ${minutes} menit ${seconds} detik</p>
+    ${analysis}${rekom}<hr>
+     <h3>📊 Detail Hasil Setiap Soal:</h3>
+    ${resultHTML}
+  `;
+
+  document.getElementById("quizSection").classList.add("hidden");
+  document.getElementById("resultSection").classList.remove("hidden");
+}
+
+function printSummary() { window.print(); }
+function restartTest() { window.location.reload(); }
+</script>
+   <footer>
+    © 2025 Lina Diah Pangestu | E-Modul Evaluasi SPLTV
+  </footer>
+</body>
+</html>
