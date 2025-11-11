@@ -9,46 +9,33 @@ body {
   font-family: "Poppins", "Segoe UI", sans-serif;
   background: #f5f7fb;
   margin: 0;
-  padding: 40px 20px;
-  color: #333;
-  line-height: 1.7;
-  text-align: justify;
+  padding: 20px;
 }
 .container {
   max-width: 850px;
   margin: auto;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 40px 50px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-h1 {
- text-align: center;
- color: #2a4d69;
- font-size: 26px;
- margin-bottom: 10px;
-}
- h2 {
+h1, h2 {
   text-align: center;
   color: #2a4d69;
-  margin-top: 30px;
-  margin-bottom: 10px;
 }
 em {
   display: block;
   text-align: center;
   color: #555;
   margin-bottom: 20px;
-    }
+}
 button {
   background: #2a4d69;
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 10px;
+  padding: 10px 20px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
-  font-size: 15px;
 }
 button:hover { background: #4b86b4; }
 .hidden { display: none; }
@@ -59,17 +46,16 @@ button:hover { background: #4b86b4; }
 .feedback { margin-top: 5px; font-style: italic;  color: #444;}
 #summary {
   background: #eef6fb;
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 10px;
+  padding: 15px;
   margin-top: 20px;
-  line-height : 1.6;
 }
 #petunjuk {
   background: #f9fafc;
-  border-radius: 14px;
-  padding: 20px 25px;
-  margin-bottom: 25px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   text-align: center;
 }
 #petunjuk h2 { color: #2a4d69; margin-bottom: 10px; }
@@ -105,7 +91,7 @@ input[type="text"] {
       <p>
         Kerjakan <strong>15 soal</strong> pilihan ganda berikut.<br>
         Berdo'alah sebelum mengerjakan. Selesaikan semua, lalu klik
-        <em><strong>"Selesai & Lihat Hasil"</strong></em>.<br>
+        <em><strong>"Selesai & Lihat Hasil"</strong></em><br>
         Jawaban akan dinilai otomatis.
       </p>
       <p style="color:#1d4ed8; font-weight:500;">
@@ -869,7 +855,7 @@ type:"mcq",
 q: "Disebuah toko beras, Bu Rani membeli beras sebanyak 5 kg Grade A, 2 kg Grade B, dan 3 kg Grade C seharga Rp 132.000,-. Dihari yang sama Bu Izna membeli beras ditoko yang sama untuk 7 kg Grade B, dan 3 kg Grade C seharga Rp 127.000,-. Tetangga yang lain pun membeli beras ditoko yang sama dengan Bu Rani dan Bu Izna dengan harga Rp39.000,- untuk 3 kg beras Grade B. Berapakah harga beras Grade A per kilogramnya?",
 options: ["Rp 15.000,-","Rp 14.500,-","Rp 13.500,-","Rp 12.000,-","Rp 10.000,-"],
 answer:0, cat:"Perhitungan",
-  fb_true:`✅ Benar — harga Grade A = Rp 15.000.<br><br>
+fb_true:`✅ Benar — harga Grade A = Rp 15.000.<br><br>
   <b>Langkah pengerjaan:</b><br>
   1️⃣ Misalkan harga per kg:<br>
   🔹 Grade A = x<br>
@@ -894,7 +880,7 @@ answer:0, cat:"Perhitungan",
 
   ✅ <b>Harga Grade A per kg = Rp 15.000.</b>`,
 
-  fb_false:"❌ Salah — urutan eliminasi harus benar agar hasil tidak meleset.<br><br>
+  fb_false:`❌ Salah — urutan eliminasi harus benar agar hasil tidak meleset.<br><br>
   <b>Langkah pengerjaan:</b><br>
   1️⃣ Misalkan harga per kg:<br>
   🔹 Grade A = x<br>
@@ -958,7 +944,7 @@ answer:4, cat:"Modeling",
 
   ✅ <b>Jawaban akhir:</b> (A, B, C) = (Rp 20.000; Rp 15.000; Rp 17.000).`,
 
-  fb_false:"❌ Salah — pastikan urutan substitusi dari (2) ke (3) dilakukan dengan benar.<br><br>
+  fb_false:`❌ Salah — pastikan urutan substitusi dari (2) ke (3) dilakukan dengan benar.<br><br>
   <b>Langkah pengerjaan:</b><br>
   1️⃣ Misalkan harga kain:<br>
   🔹 A = x<br>
@@ -983,7 +969,7 @@ answer:4, cat:"Modeling",
   C = Rp 17.000<br><br>
 
   ✅ <b>Jawaban akhir:</b> (A, B, C) = (Rp 20.000; Rp 15.000; Rp 17.000).`,
-},
+}
 ];
 
 // ==========================
