@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
@@ -65,12 +65,29 @@ button:hover { background: #4b86b4; }
 }
 #petunjuk h2 { color: #2a4d69; margin-bottom: 10px; }
 #petunjuk p { color: #333; line-height: 1.5; }
+   label {
+      display: block;
+      margin-bottom: 10px;
+    }
+input[type="text"] {
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 70%;
+      max-width: 300px;
+      margin-left: 10px;
+    }
+ footer {
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+      margin-top: 40px;
+    }
 </style>
 </head>
 <body>
 <div class="container">
   <h1>Evaluasi Sistem Persamaan Linear Tiga Variabel (SPLTV) Kelas X</h1>
- <p><em>Disusun oleh: Lina Diah Pangestu</em></p>
 
   <div id="intro">
     <!-- Petunjuk & Motivasi -->
@@ -116,9 +133,39 @@ type:"mcq",
 q:"Penyelesaian dari sistem persamaan { 3x + 7y + 2z = 8 ; 4x + 2y - 5z = -19 ; 6y - 4z = 14 } adalah ...",
 options:["x = 5, y = 3, z = 1", "x = 4, y = -5, z = 1", "x = -3, y = 4, z = 1", "x = -5, y = 3, z = 2", "x = -5, y = 3, z = 1"],
 answer:4, cat:"Perhitungan",
-fb_true:"✅ Tepat — hasilnya (x, y, z) = (-5, 3, 1). Dari persamaan (3): 6y - 4z = 14 → 3y - 2z = 7. Dari (1): 3x + 7y + 2z = 8. Substitusi z = (3y - 7)/2 ke (1) dan (2). Lakukan eliminasi bertahap, diperoleh y = 3, z = 1. Substitusi kembali → x = -5. Jadi (x, y, z) = (-5, 3, 1).",
-fb_false:"❌ Salah — periksa kembali proses eliminasi z dan substitusi y. Dari persamaan (3): 6y - 4z = 14 → 3y - 2z = 7. Dari (1): 3x + 7y + 2z = 8. Substitusi z = (3y - 7)/2 ke (1) dan (2). Lakukan eliminasi bertahap, diperoleh y = 3, z = 1. Substitusi kembali → x = -5. Jadi (x, y, z) = (-5, 3, 1).",
+fb_true:`✅ Tepat — hasilnya (x, y, z) = (−5, 3, 1).<br><br>
+<b>Langkah pengerjaan:</b><br>
+1️⃣ Dari persamaan (3): 6y − 4z = 14 → 3y − 2z = 7.<br><br>
+
+2️⃣ Dari persamaan (1): 3x + 7y + 2z = 8.<br>
+🔹 Substitusi z dari (3): z = (3y − 7)/2.<br><br>
+
+3️⃣ Masukkan ke (1) dan (2):<br>
+(1) → 3x + 7y + 2((3y − 7)/2) = 8 → 3x + 10y = 15.<br>
+(2) → 4x + 2y − 5((3y − 7)/2) = −19 → 4x − (15y − 35)/2 = −19 → 8x − 15y + 35 = −38 → 8x − 15y = −73.<br><br>
+
+4️⃣ Eliminasi antara (1) dan (2):<br>
+Dari (1): 3x + 10y = 15 → kalikan 8 → 24x + 80y = 120.<br>
+Dari (2): 8x − 15y = −73 → kalikan 3 → 24x − 45y = −219.<br>
+Kurangkan: (24x + 80y) − (24x − 45y) = 120 − (−219) → 125y = 339 → y = 3.<br><br>
+
+5️⃣ Substitusi y = 3 ke (3): 6(3) − 4z = 14 → 18 − 4z = 14 → z = 1.<br><br>
+
+6️⃣ Substitusi y = 3, z = 1 ke (1): 3x + 7(3) + 2(1) = 8 → 3x + 21 + 2 = 8 → 3x = −15 → x = −5.<br><br>
+
+✅ Jadi penyelesaiannya adalah (x, y, z) = (−5, 3, 1).`,
+
+  
+fb_false:`❌ Salah — periksa kembali proses eliminasi z dan substitusi nilai y.<br><br>
+<b>Panduan langkah:</b><br>
+1️⃣ Dari (3): 6y − 4z = 14 → 3y − 2z = 7.<br>
+2️⃣ Substitusi z = (3y − 7)/2 ke (1) dan (2).<br>
+3️⃣ Lakukan eliminasi bertahap hingga ditemukan y = 3, lalu z = 1.<br>
+4️⃣ Substitusi kembali ke (1) untuk mendapatkan x = −5.<br><br>
+✅ Hasil akhirnya: (x, y, z) = (−5, 3, 1).<br><br>
+💡<b>Tips:</b> Mulailah dari persamaan yang paling sederhana untuk mengurangi variabel terlebih dahulu (misalnya dari (3) yang tidak mengandung x).`
 },
+
 
 {
 id:2,
