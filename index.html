@@ -4,66 +4,96 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Evaluasi Sistem Persamaan Linear Tiga Variabel (SPLTV) Kelas X</title>
+
 <style>
 body {
   font-family: "Poppins", "Segoe UI", sans-serif;
   background: #f5f7fb;
   margin: 0;
-  padding: 20px;
+  padding: 40px 20px;
+  color: #333;
+  line-height: 1.7;
+  text-align: justify;
 }
+  
 .container {
   max-width: 850px;
   margin: auto;
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px 50px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
 }
-h1, h2 {
+  
+h1 {
+ text-align: center;
+ color: #2a4d69;
+ font-size: 26px;
+ margin-bottom: 10px;
+}
+  
+ h2 {
   text-align: center;
   color: #2a4d69;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
+  
 em {
   display: block;
   text-align: center;
   color: #555;
   margin-bottom: 20px;
 }
+  
 button {
   background: #2a4d69;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
+  padding: 12px 24px;
+  border-radius: 10px;
   cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 15px;
 }
+  
 button:hover { background: #4b86b4; }
+  
 .hidden { display: none; }
+  
 .question {
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
 }
+  
 .feedback { margin-top: 5px; font-style: italic;  color: #444;}
+  
 #summary {
   background: #eef6fb;
-  border-radius: 10px;
-  padding: 15px;
+  border-radius: 12px;
+  padding: 20px;
   margin-top: 20px;
+  line-height : 1.6;
 }
+  
 #petunjuk {
   background: #f9fafc;
-  border-radius: 12px;
-  padding: 15px 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 14px;
+  padding: 20px 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
   text-align: center;
 }
+  
 #petunjuk h2 { color: #2a4d69; margin-bottom: 10px; }
-#petunjuk p { color: #333; line-height: 1.5; margin-bottom: 10px;}
-   label {
+  
+#petunjuk p { color: #333; line-height: 1.6; margin-bottom: 10px;}
+  
+label {
       display: block;
       margin-bottom: 10px;
-    }
+}
+  
 input[type="text"] {
       padding: 8px 10px;
       border-radius: 6px;
@@ -72,6 +102,7 @@ input[type="text"] {
       max-width: 300px;
       margin-left: 10px;
     }
+  
  footer {
       text-align: center;
       font-size: 14px;
@@ -80,6 +111,7 @@ input[type="text"] {
     }
 </style>
 </head>
+  
 <body>
 <div class="container">
   <h1>Evaluasi Sistem Persamaan Linear Tiga Variabel (SPLTV) Kelas X</h1>
@@ -91,17 +123,21 @@ input[type="text"] {
       <p>
         Kerjakan <strong>15 soal</strong> pilihan ganda berikut.<br>
         Berdo'alah sebelum mengerjakan. Selesaikan semua, lalu klik
-        <em><strong>"Selesai & Lihat Hasil"</strong></em><br>
-        Jawaban akan dinilai otomatis.
+        <em><strong>"Selesai & Lihat Hasil"</strong></em> Jawaban akan dinilai otomatis.
       </p>
       <p style="color:#1d4ed8; font-weight:500;">
         Kerjakan dengan jujur dan percaya diri — kamu pasti bisa!💪✨<br> 
       </p>
     </section>
 
-    <p>Masukkan data diri:</p>
-    <label>Nama: <input type="text" id="studentName" required></label><br><br>
-    <label>Kelas: <input type="text" id="studentClass" required></label><br><br>
+    <p><strong>Masukkan data diri:</strong></p>
+    <label>Nama:
+      <input type="text" id="studentName" required>
+    </label>
+    <label>Kelas:
+      <input type="text" id="studentClass" required>
+    </label>
+    <br>
     <button onclick="startTest()">Mulai Evaluasi</button>
   </div>
 
